@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#4338ca">
+<title>UPXP 2026 • Controle de Atendimentos</title>
+
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#f4f6fb;
+  --card:#fff;
+  --text:#182033;
+  --muted:#6b7280;
+  --border:#dfe4ee;
+  --primary:#4f46e5;
+  --primary2:#312e81;
+  --danger:#be3845;
+  --success:#16865c;
+  --soft:#f7f8fc;
+  --shadow:0 10px 30px rgba(24,32,51,.08)
+}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.app{
+  width:min(1050px,calc(100% - 24px));
+  margin:18px auto 40px;
+}
+.hero{
+  padding:28px;
+  border-radius:22px;
+  color:white;
+  background:linear-gradient(135deg,var(--primary2),var(--primary));
+  box-shadow:var(--shadow);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+.badge,.kicker{
+  font-size:.72rem;
+  font-weight:800;
+  letter-spacing:.11em;
+}
+.badge{opacity:.75}
+.kicker{color:var(--primary)}
+.hero h1{
+  margin:6px 0 7px;
+  font-size:clamp(2.2rem,8vw,4.2rem);
+  line-height:1;
+}
+.hero p{
+  margin:0;
+  max-width:640px;
+  color:rgba(255,255,255,.82);
+}
+.event-date{
+  padding:15px 18px;
+  min-width:180px;
+  text-align:center;
+  border:1px solid rgba(255,255,255,.25);
+  background:rgba(255,255,255,.1);
+  border-radius:14px;
+}
+.event-date span,.event-date strong{display:block}
+.event-date span{font-size:.76rem;opacity:.7;margin-bottom:4px}
+.card,.stat{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:17px;
+  box-shadow:var(--shadow);
+}
+.card{
+  padding:20px;
+  margin-top:16px;
+}
+.setup{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:14px;
+}
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px
+}
+.field label{
+  font-size:.8rem;
+  font-weight:750
+}
+.field input,.field select{
+  width:100%;
+  padding:12px 13px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:white;
+  color:var(--text);
+  outline:none;
+}
+.stats{
+  display:grid;
+  grid-template-columns:1.3fr 1fr 1fr 1fr;
+  gap:14px;
+  margin-top:16px;
+}
+.stat{padding:19px}
+.stat span{
+  font-size:.78rem;
+  color:var(--muted);
+  font-weight:700
+}
+.stat strong{
+  display:block;
+  font-size:2.25rem;
+  line-height:1;
+  margin:7px 0 4px
+}
+.stat small{color:var(--muted)}
+.stat-main{
+  color:white;
+  background:#1f294b;
+  border-color:#1f294b
+}
+.stat-main span,.stat-main small{
+  color:rgba(255,255,255,.72)
+}
+h2{
+  margin:4px 0 5px;
+  font-size:1.28rem
+}
+.section p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.45
+}
+.counter{
+  display:grid;
+  grid-template-columns:.8fr 2.4fr;
+  gap:12px;
+  margin-top:18px
+}
+.btn{
+  border:0;
+  border-radius:11px;
+  padding:12px 15px;
+  min-height:46px;
+  font-weight:800
+}
+.btn:active{transform:scale(.985)}
+.btn-primary{
+  background:var(--primary);
+  color:white
+}
+.btn-light{
+  background:#edf0f6;
+  color:var(--text)
+}
+.btn-danger{
+  background:#f9e8ea;
+  color:var(--danger)
+}
+.btn-big{
+  font-size:1.18rem;
+  min-height:66px
+}
+.btn-small{
+  font-size:.78rem;
+  min-height:38px;
+  padding:8px 11px
+}
+.last{
+  text-align:center;
+  margin-top:12px;
+  color:var(--muted);
+  font-size:.85rem
+}
+.head-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:flex-start
+}
+.table-wrap{
+  overflow:auto;
+  margin-top:15px
+}
+table{
+  border-collapse:collapse;
+  width:100%
+}
+th,td{
+  padding:10px 9px;
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
+  text-align:left
+}
+th{
+  color:var(--muted);
+  font-size:.7rem;
+  text-transform:uppercase
+}
+td{font-size:.86rem}
+.empty td{
+  text-align:center;
+  color:var(--muted);
+  padding:25px
+}
+.checklist{
+  display:grid;
+  gap:11px;
+  margin-top:18px
+}
+.check-item{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  padding:14px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  background:var(--soft);
+  transition:.15s
+}
+.check-item.checked{
+  border-color:#9cd9c2;
+  background:#effaf5
+}
+.check-item input{
+  width:22px;
+  height:22px;
+  margin:1px 0 0;
+  accent-color:var(--success);
+  flex:0 0 auto
+}
+.check-text strong{
+  display:block;
+  font-size:.9rem;
+  margin-bottom:3px
+}
+.check-text span{
+  display:block;
+  font-size:.78rem;
+  color:var(--muted);
+  line-height:1.4
+}
+.progress-wrap{
+  margin-top:18px;
+  display:flex;
+  gap:12px;
+  align-items:center
+}
+.progress{
+  flex:1;
+  height:10px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#e8ebf2
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:var(--success);
+  transition:.2s
+}
+.progress-label{
+  min-width:72px;
+  color:var(--muted);
+  font-size:.8rem;
+  font-weight:700;
+  text-align:right
+}
+.notice{
+  margin:14px 0 0;
+  font-size:.78rem;
+  color:var(--muted);
+  line-height:1.4
+}
+.exports{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:15px
+}
+footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:.75rem;
+  padding:22px 0
+}
+
+@media(max-width:800px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .app{
+    width:min(100% - 14px,1050px);
+    margin:7px auto 28px
+  }
+  .hero{
+    padding:21px;
+    align-items:stretch;
+    flex-direction:column
+  }
+  .event-date{min-width:0}
+  .setup,.stats{grid-template-columns:1fr}
+  .counter{grid-template-columns:.7fr 2fr}
+  .head-row{flex-direction:column}
+  .exports .btn{width:100%}
+}
+@media print{
+  body{background:white}
+  .app{width:100%;margin:0}
+  .hero{
+    background:white;
+    color:black;
+    border:1px solid #aaa;
+    box-shadow:none
+  }
+  .hero p,.badge,.event-date span{color:#444}
+  .card,.stat{
+    box-shadow:none;
+    break-inside:avoid
+  }
+  .no-print,footer{display:none!important}
+  .stats{grid-template-columns:repeat(4,1fr)}
+  .stat-main{
+    background:white;
+    color:black;
+    border-color:#aaa
+  }
+  .stat-main span,.stat-main small{color:#555}
+}
+</style>
+</head>
+
+<body>
+<main class="app">
+
+<header class="hero">
+  <div>
+    <span class="badge">PROJETO DE EXTENSÃO 4 • ADS</span>
+    <h1>UPXP 2026</h1>
+    <p>Controle de alunos atendidos e registro das evidências fotográficas realizadas.</p>
+  </div>
+
+  <div class="event-date">
+    <span>Data do evento</span>
+    <strong>23/09/2026</strong>
+  </div>
+</header>
+
+<section class="card setup">
+  <div class="field">
+    <label for="project">Nome do projeto</label>
+    <input id="project" value="Projeto de Extensão 1">
+  </div>
+
+  <div class="field">
+    <label for="shift">Turno atual</label>
+    <select id="shift">
+      <option>Diurno</option>
+      <option>Noturno</option>
+    </select>
+  </div>
+</section>
+
+<section class="stats">
+  <article class="stat stat-main">
+    <span>Total atendido</span>
+    <strong id="total">0</strong>
+    <small>alunos</small>
+  </article>
+
+  <article class="stat">
+    <span>Diurno</span>
+    <strong id="day">0</strong>
+    <small>alunos</small>
+  </article>
+
+  <article class="stat">
+    <span>Noturno</span>
+    <strong id="night">0</strong>
+    <small>alunos</small>
+  </article>
+
+  <article class="stat">
+    <span>Evidências</span>
+    <strong id="evidenceCount">0/5</strong>
+    <small>registradas</small>
+  </article>
+</section>
+
+<section class="card no-print">
+  <div class="section">
+    <span class="kicker">ATENDIMENTOS</span>
+    <h2>Contador de alunos</h2>
+    <p>Registre cada aluno que foi atendido durante a apresentação.</p>
+  </div>
+
+  <div class="counter">
+    <button id="minus" class="btn btn-light btn-big">−1</button>
+    <button id="plus" class="btn btn-primary btn-big">+1 ALUNO</button>
+  </div>
+
+  <div class="last">
+    Último registro: <strong id="last">nenhum</strong>
+  </div>
+</section>
+
+<section class="card">
+  <div class="head-row">
+    <div class="section">
+      <span class="kicker">HISTÓRICO</span>
+      <h2>Atendimentos registrados</h2>
+      <p>O horário e o turno são registrados automaticamente.</p>
+    </div>
+
+    <button id="clearHistory" class="btn btn-danger btn-small no-print">
+      Limpar atendimentos
+    </button>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Horário</th>
+          <th>Turno</th>
+          <th>Ação</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody id="history">
+        <tr class="empty">
+          <td colspan="5">Nenhum atendimento registrado.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="card">
+  <div class="section">
+    <span class="kicker">EVIDÊNCIAS</span>
+    <h2>Checklist de fotos</h2>
+    <p>
+      Marque cada item depois que a foto correspondente já tiver sido tirada.
+      As imagens continuam salvas normalmente na galeria do celular.
+    </p>
+  </div>
+
+  <div class="checklist">
+    <label class="check-item" data-wrapper="presentation">
+      <input type="checkbox" id="presentation">
+      <div class="check-text">
+        <strong>Equipe apresentando o projeto</strong>
+        <span>Foto mostrando um integrante explicando ou demonstrando o projeto para os visitantes.</span>
+      </div>
+    </label>
+
+    <label class="check-item" data-wrapper="interaction">
+      <input type="checkbox" id="interaction">
+      <div class="check-text">
+        <strong>Interação com os visitantes</strong>
+        <span>Foto mostrando a equipe conversando, orientando ou respondendo dúvidas dos alunos.</span>
+      </div>
+    </label>
+
+    <label class="check-item" data-wrapper="usingProject">
+      <input type="checkbox" id="usingProject">
+      <div class="check-text">
+        <strong>Visitantes utilizando o projeto</strong>
+        <span>Foto mostrando alunos testando, utilizando ou interagindo diretamente com o que está sendo apresentado.</span>
+      </div>
+    </label>
+
+    <label class="check-item" data-wrapper="groupInteraction">
+      <input type="checkbox" id="groupInteraction">
+      <div class="check-text">
+        <strong>Interação com a turma</strong>
+        <span>Foto mais aberta mostrando a apresentação acontecendo com vários visitantes presentes.</span>
+      </div>
+    </label>
+
+    <label class="check-item" data-wrapper="team">
+      <input type="checkbox" id="team">
+      <div class="check-text">
+        <strong>Equipe durante a atividade</strong>
+        <span>Foto dos integrantes trabalhando durante o atendimento, preferencialmente com visitantes ao redor.</span>
+      </div>
+    </label>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+    <div id="progressLabel" class="progress-label">0 de 5</div>
+  </div>
+
+  <p class="notice">
+    O checklist é salvo automaticamente neste navegador. Ele serve apenas para lembrar quais evidências já foram registradas.
+  </p>
+
+  <button id="resetChecklist" class="btn btn-danger btn-small no-print" style="margin-top:14px">
+    Limpar checklist
+  </button>
+</section>
+
+<section class="card">
+  <div class="section">
+    <span class="kicker">RELATÓRIO</span>
+    <h2>Exportar registros</h2>
+    <p>Gere um resumo para auxiliar na elaboração do relatório final.</p>
+  </div>
+
+  <div class="exports no-print">
+    <button id="txt" class="btn btn-primary">Baixar resumo TXT</button>
+    <button id="csv" class="btn btn-light">Baixar histórico CSV</button>
+    <button id="print" class="btn btn-light">Imprimir / Salvar PDF</button>
+  </div>
+</section>
+
+<footer>UPXP 2026 • Controle local de atendimentos e evidências</footer>
+
+</main>
+
+<script>
+const KEY="upxp_2026_checklist_v2";
+
+const checkboxIds=[
+  "presentation",
+  "interaction",
+  "usingProject",
+  "groupInteraction",
+  "team"
+];
+
+function baseState(){
+  return {
+    project:"Projeto de Extensão 1",
+    shift:"Diurno",
+    events:[],
+    checklist:{
+      presentation:false,
+      interaction:false,
+      usingProject:false,
+      groupInteraction:false,
+      team:false
+    }
+  };
+}
+
+function loadState(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(KEY));
+    const base=baseState();
+
+    if(!saved) return base;
+
+    return {
+      ...base,
+      ...saved,
+      checklist:{
+        ...base.checklist,
+        ...(saved.checklist||{})
+      }
+    };
+  }catch{
+    return baseState();
+  }
+}
+
+const state=loadState();
+const $=id=>document.getElementById(id);
+
+function save(){
+  localStorage.setItem(KEY,JSON.stringify(state));
+}
+
+function totals(){
+  let total=0,day=0,night=0;
+
+  state.events.forEach(e=>{
+    total+=e.delta;
+    if(e.shift==="Diurno") day+=e.delta;
+    if(e.shift==="Noturno") night+=e.delta;
+  });
+
+  return {
+    total:Math.max(0,total),
+    day:Math.max(0,day),
+    night:Math.max(0,night)
+  };
+}
+
+function fmt(iso){
+  return new Intl.DateTimeFormat("pt-BR",{
+    day:"2-digit",
+    month:"2-digit",
+    hour:"2-digit",
+    minute:"2-digit",
+    second:"2-digit"
+  }).format(new Date(iso));
+}
+
+function esc(v){
+  return String(v)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function add(delta){
+  const current=state.events.reduce((s,e)=>s+e.delta,0);
+
+  if(delta<0 && current<=0){
+    alert("O contador já está em zero.");
+    return;
+  }
+
+  state.events.push({
+    time:new Date().toISOString(),
+    shift:state.shift,
+    delta
+  });
+
+  save();
+  renderAttendance();
+}
+
+function renderAttendance(){
+  $("project").value=state.project;
+  $("shift").value=state.shift;
+
+  const t=totals();
+  $("total").textContent=t.total;
+  $("day").textContent=t.day;
+  $("night").textContent=t.night;
+
+  if(state.events.length===0){
+    $("last").textContent="nenhum";
+    $("history").innerHTML=
+      '<tr class="empty"><td colspan="5">Nenhum atendimento registrado.</td></tr>';
+    return;
+  }
+
+  $("last").textContent=fmt(state.events[state.events.length-1].time);
+
+  let running=0;
+
+  const rows=state.events.map((e,i)=>{
+    running+=e.delta;
+    return {
+      ...e,
+      index:i+1,
+      running
+    };
+  }).reverse();
+
+  $("history").innerHTML=rows.map(r=>`
+    <tr>
+      <td>${r.index}</td>
+      <td>${fmt(r.time)}</td>
+      <td>${esc(r.shift)}</td>
+      <td>${r.delta>0?"+1":"−1"}</td>
+      <td>${r.running}</td>
+    </tr>
+  `).join("");
+}
+
+function renderChecklist(){
+  let done=0;
+
+  checkboxIds.forEach(id=>{
+    const input=$(id);
+    const checked=Boolean(state.checklist[id]);
+
+    input.checked=checked;
+
+    const wrapper=document.querySelector(`[data-wrapper="${id}"]`);
+    wrapper.classList.toggle("checked",checked);
+
+    if(checked) done++;
+  });
+
+  $("evidenceCount").textContent=`${done}/5`;
+  $("progressLabel").textContent=`${done} de 5`;
+  $("progressBar").style.width=`${(done/5)*100}%`;
+}
+
+checkboxIds.forEach(id=>{
+  $(id).addEventListener("change",e=>{
+    state.checklist[id]=e.target.checked;
+    save();
+    renderChecklist();
+  });
+});
+
+$("project").addEventListener("input",e=>{
+  state.project=e.target.value;
+  save();
+});
+
+$("shift").addEventListener("change",e=>{
+  state.shift=e.target.value;
+  save();
+});
+
+$("plus").onclick=()=>add(1);
+$("minus").onclick=()=>add(-1);
+
+$("clearHistory").onclick=()=>{
+  if(!confirm("Apagar todos os atendimentos registrados?")) return;
+
+  state.events=[];
+  save();
+  renderAttendance();
+};
+
+$("resetChecklist").onclick=()=>{
+  if(!confirm("Desmarcar todas as evidências?")) return;
+
+  checkboxIds.forEach(id=>{
+    state.checklist[id]=false;
+  });
+
+  save();
+  renderChecklist();
+};
+
+function download(name,content,type){
+  const blob=new Blob([content],{type});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+
+  a.href=url;
+  a.download=name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+$("txt").onclick=()=>{
+  const t=totals();
+
+  const evidenceLabels={
+    presentation:"Equipe apresentando o projeto",
+    interaction:"Interação com os visitantes",
+    usingProject:"Visitantes utilizando o projeto",
+    groupInteraction:"Interação com a turma",
+    team:"Equipe durante a atividade"
+  };
+
+  const lines=[
+    "UPXP 2026 — RESUMO DE ATENDIMENTOS",
+    "===================================",
+    "",
+    "Projeto: "+state.project,
+    "Data do evento: 23/09/2026",
+    "",
+    "ATENDIMENTOS",
+    "------------",
+    "Total de alunos atendidos: "+t.total,
+    "Diurno: "+t.day,
+    "Noturno: "+t.night,
+    "",
+    "EVIDÊNCIAS FOTOGRÁFICAS",
+    "-----------------------"
+  ];
+
+  checkboxIds.forEach(id=>{
+    lines.push(`${state.checklist[id]?"[X]":"[ ]"} ${evidenceLabels[id]}`);
+  });
+
+  lines.push("","HISTÓRICO","---------");
+
+  let running=0;
+
+  state.events.forEach((e,i)=>{
+    running+=e.delta;
+    lines.push(
+      `${i+1} | ${fmt(e.time)} | ${e.shift} | ${e.delta>0?"+1":"-1"} | Total ${running}`
+    );
+  });
+
+  download(
+    "UPXP_2026_Resumo.txt",
+    lines.join("\n"),
+    "text/plain;charset=utf-8"
+  );
+};
+
+$("csv").onclick=()=>{
+  const rows=[
+    ["Registro","Data/Hora","Turno","Acao","Total"]
+  ];
+
+  let running=0;
+
+  state.events.forEach((e,i)=>{
+    running+=e.delta;
+    rows.push([
+      i+1,
+      fmt(e.time),
+      e.shift,
+      e.delta>0?"+1":"-1",
+      running
+    ]);
+  });
+
+  const csv="\uFEFF"+rows
+    .map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(";"))
+    .join("\n");
+
+  download(
+    "UPXP_2026_Atendimentos.csv",
+    csv,
+    "text/csv;charset=utf-8"
+  );
+};
+
+$("print").onclick=()=>window.print();
+
+renderAttendance();
+renderChecklist();
+</script>
+</body>
+</html>
