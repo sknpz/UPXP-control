@@ -295,6 +295,20 @@ footer{
   padding:22px 0
 }
 
+
+.reconstruction-note{
+  margin-top:16px;
+  border-left:4px solid var(--primary);
+  background:#eef0ff;
+  padding:12px 16px;
+  border-radius:8px;
+  font-size:.87rem;
+  line-height:1.45;
+}
+.reconstruction-note strong{display:block;margin-bottom:3px}
+@media print{
+  .reconstruction-note{border:1px solid #aaa;background:white;break-inside:avoid}
+}
 @media(max-width:800px){
   .stats{grid-template-columns:repeat(2,1fr)}
 }
@@ -397,6 +411,11 @@ footer{
   </article>
 </section>
 
+<aside class="reconstruction-note" aria-label="Origem dos dados">
+  <strong>Controle reconstruído</strong>
+  <span>Base: PDF diurno (111 atendimentos) mais os lançamentos noturnos a partir das 19h13 do PDF complementar (saldo líquido de 80). Nesta cópia, a numeração é contínua e os totais foram recalculados. Os horários, turnos e ações dos lançamentos selecionados foram preservados. Guarde os PDFs originais como evidência do histórico completo.</span>
+</aside>
+
 <section class="card no-print">
   <div class="section">
     <span class="kicker">ATENDIMENTOS</span>
@@ -419,7 +438,7 @@ footer{
     <div class="section">
       <span class="kicker">HISTÓRICO</span>
       <h2>Atendimentos registrados</h2>
-      <p>O horário e o turno são registrados automaticamente.</p>
+      <p>Os lançamentos de origem preservam seus horários; novos lançamentos recebem horário e turno automaticamente.</p>
     </div>
 
     <button id="clearHistory" class="btn btn-danger btn-small no-print">
@@ -534,7 +553,9 @@ footer{
 </main>
 
 <script>
-const KEY="upxp_2026_checklist_v2";
+const KEY="upxp_2026_reconstruido_sequencial_v2";
+const DATA_VERSION=2;
+const RECONSTRUCTED_EVENTS=[{"record":1,"sourceRecord":1,"time":"2026-09-23T08:40:31-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":1},{"record":2,"sourceRecord":2,"time":"2026-09-23T08:40:31-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":2},{"record":3,"sourceRecord":3,"time":"2026-09-23T08:40:32-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":3},{"record":4,"sourceRecord":4,"time":"2026-09-23T08:41:59-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":4},{"record":5,"sourceRecord":5,"time":"2026-09-23T08:41:59-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":5},{"record":6,"sourceRecord":6,"time":"2026-09-23T08:45:13-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":6},{"record":7,"sourceRecord":7,"time":"2026-09-23T08:45:13-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":7},{"record":8,"sourceRecord":8,"time":"2026-09-23T08:49:06-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":8},{"record":9,"sourceRecord":9,"time":"2026-09-23T08:49:06-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":9},{"record":10,"sourceRecord":10,"time":"2026-09-23T08:49:06-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":10},{"record":11,"sourceRecord":11,"time":"2026-09-23T08:49:39-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":11},{"record":12,"sourceRecord":12,"time":"2026-09-23T08:49:39-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":12},{"record":13,"sourceRecord":13,"time":"2026-09-23T08:49:39-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":13},{"record":14,"sourceRecord":14,"time":"2026-09-23T08:49:57-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":14},{"record":15,"sourceRecord":15,"time":"2026-09-23T08:49:57-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":15},{"record":16,"sourceRecord":16,"time":"2026-09-23T08:49:57-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":16},{"record":17,"sourceRecord":17,"time":"2026-09-23T08:49:57-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":17},{"record":18,"sourceRecord":18,"time":"2026-09-23T08:52:11-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":18},{"record":19,"sourceRecord":19,"time":"2026-09-23T08:58:35-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":19},{"record":20,"sourceRecord":20,"time":"2026-09-23T08:58:35-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":20},{"record":21,"sourceRecord":21,"time":"2026-09-23T08:58:36-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":21},{"record":22,"sourceRecord":22,"time":"2026-09-23T09:01:20-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":22},{"record":23,"sourceRecord":23,"time":"2026-09-23T09:01:21-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":23},{"record":24,"sourceRecord":24,"time":"2026-09-23T09:01:21-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":24},{"record":25,"sourceRecord":25,"time":"2026-09-23T09:04:33-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":25},{"record":26,"sourceRecord":26,"time":"2026-09-23T09:05:35-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":26},{"record":27,"sourceRecord":27,"time":"2026-09-23T09:07:09-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":27},{"record":28,"sourceRecord":28,"time":"2026-09-23T09:07:09-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":28},{"record":29,"sourceRecord":29,"time":"2026-09-23T09:07:09-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":29},{"record":30,"sourceRecord":30,"time":"2026-09-23T09:12:19-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":30},{"record":31,"sourceRecord":31,"time":"2026-09-23T09:12:19-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":31},{"record":32,"sourceRecord":32,"time":"2026-09-23T09:12:19-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":32},{"record":33,"sourceRecord":33,"time":"2026-09-23T09:15:46-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":33},{"record":34,"sourceRecord":34,"time":"2026-09-23T09:15:47-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":34},{"record":35,"sourceRecord":35,"time":"2026-09-23T09:17:27-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":35},{"record":36,"sourceRecord":36,"time":"2026-09-23T09:17:27-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":36},{"record":37,"sourceRecord":37,"time":"2026-09-23T09:17:27-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":37},{"record":38,"sourceRecord":38,"time":"2026-09-23T09:17:27-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":38},{"record":39,"sourceRecord":39,"time":"2026-09-23T09:18:07-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":39},{"record":40,"sourceRecord":40,"time":"2026-09-23T09:21:46-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":40},{"record":41,"sourceRecord":41,"time":"2026-09-23T09:21:46-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":41},{"record":42,"sourceRecord":42,"time":"2026-09-23T09:21:46-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":42},{"record":43,"sourceRecord":43,"time":"2026-09-23T09:21:46-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":43},{"record":44,"sourceRecord":44,"time":"2026-09-23T09:22:48-03:00","shift":"Diurno","delta":-1,"source":"PDF diurno","sourceTotal":42},{"record":45,"sourceRecord":45,"time":"2026-09-23T09:22:48-03:00","shift":"Diurno","delta":-1,"source":"PDF diurno","sourceTotal":41},{"record":46,"sourceRecord":46,"time":"2026-09-23T09:22:48-03:00","shift":"Diurno","delta":-1,"source":"PDF diurno","sourceTotal":40},{"record":47,"sourceRecord":47,"time":"2026-09-23T09:22:49-03:00","shift":"Diurno","delta":-1,"source":"PDF diurno","sourceTotal":39},{"record":48,"sourceRecord":48,"time":"2026-09-23T09:24:06-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":40},{"record":49,"sourceRecord":49,"time":"2026-09-23T09:24:06-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":41},{"record":50,"sourceRecord":50,"time":"2026-09-23T09:24:06-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":42},{"record":51,"sourceRecord":51,"time":"2026-09-23T09:24:07-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":43},{"record":52,"sourceRecord":52,"time":"2026-09-23T09:24:07-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":44},{"record":53,"sourceRecord":53,"time":"2026-09-23T09:24:07-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":45},{"record":54,"sourceRecord":54,"time":"2026-09-23T09:24:07-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":46},{"record":55,"sourceRecord":55,"time":"2026-09-23T09:24:07-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":47},{"record":56,"sourceRecord":56,"time":"2026-09-23T09:24:07-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":48},{"record":57,"sourceRecord":57,"time":"2026-09-23T09:24:07-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":49},{"record":58,"sourceRecord":58,"time":"2026-09-23T09:25:24-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":50},{"record":59,"sourceRecord":59,"time":"2026-09-23T09:29:15-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":51},{"record":60,"sourceRecord":60,"time":"2026-09-23T09:29:16-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":52},{"record":61,"sourceRecord":61,"time":"2026-09-23T09:35:14-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":53},{"record":62,"sourceRecord":62,"time":"2026-09-23T09:35:14-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":54},{"record":63,"sourceRecord":63,"time":"2026-09-23T09:35:15-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":55},{"record":64,"sourceRecord":64,"time":"2026-09-23T09:40:53-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":56},{"record":65,"sourceRecord":65,"time":"2026-09-23T09:40:53-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":57},{"record":66,"sourceRecord":66,"time":"2026-09-23T09:41:02-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":58},{"record":67,"sourceRecord":67,"time":"2026-09-23T09:41:02-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":59},{"record":68,"sourceRecord":68,"time":"2026-09-23T09:42:41-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":60},{"record":69,"sourceRecord":69,"time":"2026-09-23T09:42:41-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":61},{"record":70,"sourceRecord":70,"time":"2026-09-23T09:45:33-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":62},{"record":71,"sourceRecord":71,"time":"2026-09-23T09:45:34-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":63},{"record":72,"sourceRecord":72,"time":"2026-09-23T09:49:09-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":64},{"record":73,"sourceRecord":73,"time":"2026-09-23T09:49:10-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":65},{"record":74,"sourceRecord":74,"time":"2026-09-23T09:49:10-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":66},{"record":75,"sourceRecord":75,"time":"2026-09-23T09:54:48-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":67},{"record":76,"sourceRecord":76,"time":"2026-09-23T09:54:49-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":68},{"record":77,"sourceRecord":77,"time":"2026-09-23T09:54:49-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":69},{"record":78,"sourceRecord":78,"time":"2026-09-23T09:54:49-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":70},{"record":79,"sourceRecord":79,"time":"2026-09-23T09:54:59-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":71},{"record":80,"sourceRecord":80,"time":"2026-09-23T09:54:59-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":72},{"record":81,"sourceRecord":81,"time":"2026-09-23T10:01:13-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":73},{"record":82,"sourceRecord":82,"time":"2026-09-23T10:01:13-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":74},{"record":83,"sourceRecord":83,"time":"2026-09-23T10:01:14-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":75},{"record":84,"sourceRecord":84,"time":"2026-09-23T10:01:31-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":76},{"record":85,"sourceRecord":85,"time":"2026-09-23T10:01:31-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":77},{"record":86,"sourceRecord":86,"time":"2026-09-23T10:07:05-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":78},{"record":87,"sourceRecord":87,"time":"2026-09-23T10:07:05-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":79},{"record":88,"sourceRecord":88,"time":"2026-09-23T10:10:04-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":80},{"record":89,"sourceRecord":89,"time":"2026-09-23T10:11:22-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":81},{"record":90,"sourceRecord":90,"time":"2026-09-23T10:11:22-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":82},{"record":91,"sourceRecord":91,"time":"2026-09-23T10:11:25-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":83},{"record":92,"sourceRecord":92,"time":"2026-09-23T10:15:59-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":84},{"record":93,"sourceRecord":93,"time":"2026-09-23T10:16:00-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":85},{"record":94,"sourceRecord":94,"time":"2026-09-23T10:16:00-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":86},{"record":95,"sourceRecord":95,"time":"2026-09-23T10:19:16-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":87},{"record":96,"sourceRecord":96,"time":"2026-09-23T10:19:16-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":88},{"record":97,"sourceRecord":97,"time":"2026-09-23T10:19:17-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":89},{"record":98,"sourceRecord":98,"time":"2026-09-23T10:19:50-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":90},{"record":99,"sourceRecord":99,"time":"2026-09-23T10:19:50-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":91},{"record":100,"sourceRecord":100,"time":"2026-09-23T10:19:51-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":92},{"record":101,"sourceRecord":101,"time":"2026-09-23T10:19:51-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":93},{"record":102,"sourceRecord":102,"time":"2026-09-23T10:19:51-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":94},{"record":103,"sourceRecord":103,"time":"2026-09-23T10:19:52-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":95},{"record":104,"sourceRecord":104,"time":"2026-09-23T10:19:52-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":96},{"record":105,"sourceRecord":105,"time":"2026-09-23T10:24:43-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":97},{"record":106,"sourceRecord":106,"time":"2026-09-23T10:24:43-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":98},{"record":107,"sourceRecord":107,"time":"2026-09-23T10:25:48-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":99},{"record":108,"sourceRecord":108,"time":"2026-09-23T10:25:48-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":100},{"record":109,"sourceRecord":109,"time":"2026-09-23T10:25:48-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":101},{"record":110,"sourceRecord":110,"time":"2026-09-23T10:26:16-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":102},{"record":111,"sourceRecord":111,"time":"2026-09-23T10:35:50-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":103},{"record":112,"sourceRecord":112,"time":"2026-09-23T10:35:52-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":104},{"record":113,"sourceRecord":113,"time":"2026-09-23T10:40:33-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":105},{"record":114,"sourceRecord":114,"time":"2026-09-23T10:40:34-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":106},{"record":115,"sourceRecord":115,"time":"2026-09-23T10:43:31-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":107},{"record":116,"sourceRecord":116,"time":"2026-09-23T10:43:31-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":108},{"record":117,"sourceRecord":117,"time":"2026-09-23T10:43:31-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":109},{"record":118,"sourceRecord":118,"time":"2026-09-23T10:43:32-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":110},{"record":119,"sourceRecord":119,"time":"2026-09-23T10:44:09-03:00","shift":"Diurno","delta":1,"source":"PDF diurno","sourceTotal":111},{"record":120,"sourceRecord":233,"time":"2026-09-23T19:13:35-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":1},{"record":121,"sourceRecord":234,"time":"2026-09-23T19:17:22-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":2},{"record":122,"sourceRecord":235,"time":"2026-09-23T19:17:23-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":3},{"record":123,"sourceRecord":236,"time":"2026-09-23T19:17:24-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":4},{"record":124,"sourceRecord":237,"time":"2026-09-23T19:17:25-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":5},{"record":125,"sourceRecord":238,"time":"2026-09-23T19:17:29-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":6},{"record":126,"sourceRecord":239,"time":"2026-09-23T19:28:44-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":7},{"record":127,"sourceRecord":240,"time":"2026-09-23T19:28:44-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":8},{"record":128,"sourceRecord":241,"time":"2026-09-23T19:28:46-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":9},{"record":129,"sourceRecord":242,"time":"2026-09-23T19:33:03-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":10},{"record":130,"sourceRecord":243,"time":"2026-09-23T19:33:04-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":11},{"record":131,"sourceRecord":244,"time":"2026-09-23T19:33:05-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":12},{"record":132,"sourceRecord":245,"time":"2026-09-23T19:33:12-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":13},{"record":133,"sourceRecord":246,"time":"2026-09-23T19:38:47-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":14},{"record":134,"sourceRecord":247,"time":"2026-09-23T19:50:38-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":15},{"record":135,"sourceRecord":248,"time":"2026-09-23T19:50:50-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":16},{"record":136,"sourceRecord":249,"time":"2026-09-23T19:51:16-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":17},{"record":137,"sourceRecord":250,"time":"2026-09-23T19:51:23-03:00","shift":"Noturno","delta":-1,"source":"PDF complementar","sourceTotal":16},{"record":138,"sourceRecord":251,"time":"2026-09-23T19:52:12-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":17},{"record":139,"sourceRecord":252,"time":"2026-09-23T19:52:13-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":18},{"record":140,"sourceRecord":253,"time":"2026-09-23T19:52:13-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":19},{"record":141,"sourceRecord":254,"time":"2026-09-23T19:52:14-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":20},{"record":142,"sourceRecord":255,"time":"2026-09-23T19:52:15-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":21},{"record":143,"sourceRecord":256,"time":"2026-09-23T19:55:33-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":22},{"record":144,"sourceRecord":257,"time":"2026-09-23T19:55:34-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":23},{"record":145,"sourceRecord":258,"time":"2026-09-23T19:55:34-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":24},{"record":146,"sourceRecord":259,"time":"2026-09-23T19:55:35-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":25},{"record":147,"sourceRecord":260,"time":"2026-09-23T19:55:35-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":26},{"record":148,"sourceRecord":261,"time":"2026-09-23T20:05:54-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":27},{"record":149,"sourceRecord":262,"time":"2026-09-23T20:05:55-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":28},{"record":150,"sourceRecord":263,"time":"2026-09-23T20:05:55-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":29},{"record":151,"sourceRecord":264,"time":"2026-09-23T20:05:56-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":30},{"record":152,"sourceRecord":265,"time":"2026-09-23T20:05:57-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":31},{"record":153,"sourceRecord":266,"time":"2026-09-23T20:05:57-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":32},{"record":154,"sourceRecord":267,"time":"2026-09-23T20:05:58-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":33},{"record":155,"sourceRecord":268,"time":"2026-09-23T20:12:57-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":34},{"record":156,"sourceRecord":269,"time":"2026-09-23T20:20:15-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":35},{"record":157,"sourceRecord":270,"time":"2026-09-23T20:20:16-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":36},{"record":158,"sourceRecord":271,"time":"2026-09-23T20:20:17-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":37},{"record":159,"sourceRecord":272,"time":"2026-09-23T20:20:21-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":38},{"record":160,"sourceRecord":273,"time":"2026-09-23T20:20:25-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":39},{"record":161,"sourceRecord":274,"time":"2026-09-23T20:25:33-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":40},{"record":162,"sourceRecord":275,"time":"2026-09-23T20:25:34-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":41},{"record":163,"sourceRecord":276,"time":"2026-09-23T20:25:34-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":42},{"record":164,"sourceRecord":277,"time":"2026-09-23T20:33:29-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":43},{"record":165,"sourceRecord":278,"time":"2026-09-23T20:43:29-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":44},{"record":166,"sourceRecord":279,"time":"2026-09-23T20:43:29-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":45},{"record":167,"sourceRecord":280,"time":"2026-09-23T20:45:11-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":46},{"record":168,"sourceRecord":281,"time":"2026-09-23T20:45:12-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":47},{"record":169,"sourceRecord":282,"time":"2026-09-23T20:48:27-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":48},{"record":170,"sourceRecord":283,"time":"2026-09-23T20:48:28-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":49},{"record":171,"sourceRecord":284,"time":"2026-09-23T21:04:58-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":50},{"record":172,"sourceRecord":285,"time":"2026-09-23T21:04:58-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":51},{"record":173,"sourceRecord":286,"time":"2026-09-23T21:06:09-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":52},{"record":174,"sourceRecord":287,"time":"2026-09-23T21:06:47-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":53},{"record":175,"sourceRecord":288,"time":"2026-09-23T21:06:47-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":54},{"record":176,"sourceRecord":289,"time":"2026-09-23T21:09:07-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":55},{"record":177,"sourceRecord":290,"time":"2026-09-23T21:09:07-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":56},{"record":178,"sourceRecord":291,"time":"2026-09-23T21:12:48-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":57},{"record":179,"sourceRecord":292,"time":"2026-09-23T21:12:48-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":58},{"record":180,"sourceRecord":293,"time":"2026-09-23T21:12:49-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":59},{"record":181,"sourceRecord":294,"time":"2026-09-23T21:12:50-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":60},{"record":182,"sourceRecord":295,"time":"2026-09-23T21:14:25-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":61},{"record":183,"sourceRecord":296,"time":"2026-09-23T21:14:26-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":62},{"record":184,"sourceRecord":297,"time":"2026-09-23T21:14:27-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":63},{"record":185,"sourceRecord":298,"time":"2026-09-23T21:14:27-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":64},{"record":186,"sourceRecord":299,"time":"2026-09-23T21:14:28-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":65},{"record":187,"sourceRecord":300,"time":"2026-09-23T21:17:46-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":66},{"record":188,"sourceRecord":301,"time":"2026-09-23T21:17:49-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":67},{"record":189,"sourceRecord":302,"time":"2026-09-23T21:18:13-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":68},{"record":190,"sourceRecord":303,"time":"2026-09-23T21:18:13-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":69},{"record":191,"sourceRecord":304,"time":"2026-09-23T21:18:14-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":70},{"record":192,"sourceRecord":305,"time":"2026-09-23T21:23:00-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":71},{"record":193,"sourceRecord":306,"time":"2026-09-23T21:27:34-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":72},{"record":194,"sourceRecord":307,"time":"2026-09-23T21:27:35-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":73},{"record":195,"sourceRecord":308,"time":"2026-09-23T21:27:35-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":74},{"record":196,"sourceRecord":309,"time":"2026-09-23T21:27:36-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":75},{"record":197,"sourceRecord":310,"time":"2026-09-23T21:27:36-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":76},{"record":198,"sourceRecord":311,"time":"2026-09-23T21:34:51-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":77},{"record":199,"sourceRecord":312,"time":"2026-09-23T21:34:51-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":78},{"record":200,"sourceRecord":313,"time":"2026-09-23T21:34:52-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":79},{"record":201,"sourceRecord":314,"time":"2026-09-23T21:34:52-03:00","shift":"Noturno","delta":1,"source":"PDF complementar","sourceTotal":80}];
 
 const checkboxIds=[
   "presentation",
@@ -546,15 +567,16 @@ const checkboxIds=[
 
 function baseState(){
   return {
-    project:"Projeto de Extensão 1",
-    shift:"Diurno",
-    events:[],
+    dataVersion:DATA_VERSION,
+    project:"RFID - ITAG",
+    shift:"Noturno",
+    events:RECONSTRUCTED_EVENTS.map(event=>({...event})),
     checklist:{
-      presentation:false,
-      interaction:false,
-      usingProject:false,
-      groupInteraction:false,
-      team:false
+      presentation:true,
+      interaction:true,
+      usingProject:true,
+      groupInteraction:true,
+      team:true
     }
   };
 }
@@ -564,7 +586,7 @@ function loadState(){
     const saved=JSON.parse(localStorage.getItem(KEY));
     const base=baseState();
 
-    if(!saved) return base;
+    if(!saved || saved.dataVersion!==DATA_VERSION) return base;
 
     return {
       ...base,
@@ -604,6 +626,7 @@ function totals(){
 
 function fmt(iso){
   return new Intl.DateTimeFormat("pt-BR",{
+    timeZone:"America/Sao_Paulo",
     day:"2-digit",
     month:"2-digit",
     hour:"2-digit",
@@ -630,6 +653,8 @@ function add(delta){
   }
 
   state.events.push({
+    record:Math.max(0,...state.events.map(e=>e.record||0))+1,
+    source:"Novo lançamento nesta cópia",
     time:new Date().toISOString(),
     shift:state.shift,
     delta
@@ -663,7 +688,7 @@ function renderAttendance(){
     running+=e.delta;
     return {
       ...e,
-      index:i+1,
+      index:e.record??i+1,
       running
     };
   }).reverse();
@@ -721,7 +746,7 @@ $("plus").onclick=()=>add(1);
 $("minus").onclick=()=>add(-1);
 
 $("clearHistory").onclick=()=>{
-  if(!confirm("Apagar todos os atendimentos registrados?")) return;
+  if(!confirm("Apagar os atendimentos desta cópia reconstruída? Os PDFs originais não serão alterados.")) return;
 
   state.events=[];
   save();
@@ -770,6 +795,10 @@ $("txt").onclick=()=>{
     "",
     "Projeto: "+state.project,
     "Data do evento: 23/09/2026",
+    "Controle reconstruído a partir do PDF diurno (111 atendimentos) e dos lançamentos noturnos do PDF complementar (saldo líquido de 80).",
+    "A numeração desta cópia é contínua de 1 a 201; os registros noturnos correspondem aos números 233–314 da fonte. A numeração e os totais exibidos foram recalculados.",
+    "Horários, turnos e ações dos lançamentos selecionados foram preservados.",
+    "O PDF complementar original deve ser mantido como evidência da sequência completa.",
     "",
     "ATENDIMENTOS",
     "------------",
@@ -792,12 +821,12 @@ $("txt").onclick=()=>{
   state.events.forEach((e,i)=>{
     running+=e.delta;
     lines.push(
-      `${i+1} | ${fmt(e.time)} | ${e.shift} | ${e.delta>0?"+1":"-1"} | Total ${running}`
+      `${e.record??i+1} | ${fmt(e.time)} | ${e.shift} | ${e.delta>0?"+1":"-1"} | Total ${running}`
     );
   });
 
   download(
-    "UPXP_2026_Resumo.txt",
+    "UPXP_2026_Resumo_Reconstruido.txt",
     lines.join("\n"),
     "text/plain;charset=utf-8"
   );
@@ -813,7 +842,7 @@ $("csv").onclick=()=>{
   state.events.forEach((e,i)=>{
     running+=e.delta;
     rows.push([
-      i+1,
+      e.record??i+1,
       fmt(e.time),
       e.shift,
       e.delta>0?"+1":"-1",
@@ -826,7 +855,7 @@ $("csv").onclick=()=>{
     .join("\n");
 
   download(
-    "UPXP_2026_Atendimentos.csv",
+    "UPXP_2026_Atendimentos_Reconstruidos.csv",
     csv,
     "text/csv;charset=utf-8"
   );
